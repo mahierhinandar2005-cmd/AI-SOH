@@ -25,11 +25,10 @@ html, body, [class*="css"] {
     min-height: 100vh;
 }
 
-/* Hide default streamlit elements */
 #MainMenu, footer, header {visibility: hidden;}
 .block-container { padding-top: 2rem; padding-bottom: 2rem; max-width: 720px; }
 
-/* ========== MASCOT BUBBLE ========== */
+/* Mascot bubble */
 .mascot-wrap {
     display: flex;
     align-items: flex-end;
@@ -55,7 +54,7 @@ html, body, [class*="css"] {
     font-size: 0.95rem;
     font-weight: 500;
     line-height: 1.6;
-    box-shadow: 0 4px 20px rgba(16,185,129,0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 4px 20px rgba(16,185,129,0.15);
     max-width: 500px;
     position: relative;
 }
@@ -72,7 +71,7 @@ html, body, [class*="css"] {
     clip-path: polygon(100% 0, 0 100%, 100% 100%);
 }
 
-/* ========== USER BUBBLE ========== */
+/* User bubble */
 .user-wrap {
     display: flex;
     justify-content: flex-end;
@@ -89,7 +88,7 @@ html, body, [class*="css"] {
     box-shadow: 0 4px 16px rgba(16,185,129,0.35);
 }
 
-/* ========== INPUT CARD ========== */
+/* Input card */
 .input-card {
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(16,185,129,0.25);
@@ -112,7 +111,7 @@ html, body, [class*="css"] {
     margin-top: 2px;
 }
 
-/* ========== STREAMLIT INPUT OVERRIDES ========== */
+/* Streamlit input */
 .stNumberInput input {
     background: rgba(30,41,59,0.9) !important;
     color: white !important;
@@ -124,7 +123,7 @@ html, body, [class*="css"] {
     font-weight: 600 !important;
 }
 
-/* ========== RESULT CARD ========== */
+/* Result card */
 .result-card {
     background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,182,212,0.1));
     border: 2px solid #10b981;
@@ -150,7 +149,37 @@ html, body, [class*="css"] {
     margin-top: 6px;
 }
 
-/* ========== BUTTON ========== */
+/* Parameter suggestion card */
+.suggestion-card {
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    border-left: 3px solid;
+}
+.suggestion-good {
+    border-left-color: #10b981;
+    background: rgba(16,185,129,0.08);
+}
+.suggestion-warning {
+    border-left-color: #f59e0b;
+    background: rgba(245,158,11,0.08);
+}
+.suggestion-critical {
+    border-left-color: #ef4444;
+    background: rgba(239,68,68,0.08);
+}
+.suggestion-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+.suggestion-text {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* Button */
 .stButton > button {
     background: linear-gradient(135deg, #10b981, #06b6d4) !important;
     color: white !important;
@@ -161,14 +190,13 @@ html, body, [class*="css"] {
     padding: 0.6rem 1.5rem !important;
     width: 100% !important;
     transition: all 0.2s !important;
-    box-shadow: 0 4px 14px rgba(16,185,129,0.3) !important;
 }
 .stButton > button:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 8px 24px rgba(16,185,129,0.4) !important;
 }
 
-/* ========== PROGRESS BAR ========== */
+/* Progress bar */
 .prog-bar-wrap {
     background: rgba(255,255,255,0.08);
     border-radius: 99px;
@@ -183,7 +211,7 @@ html, body, [class*="css"] {
     transition: width 0.5s ease;
 }
 
-/* ========== STEP CHIP ========== */
+/* Step chip */
 .step-chip {
     display: inline-block;
     background: rgba(16,185,129,0.15);
@@ -196,7 +224,7 @@ html, body, [class*="css"] {
     margin-bottom: 10px;
 }
 
-/* ========== TITLE ========== */
+/* Title */
 .app-title {
     text-align: center;
     background: linear-gradient(135deg, #10b981, #06b6d4);
@@ -215,22 +243,10 @@ html, body, [class*="css"] {
     margin-bottom: 24px;
 }
 
-/* ========== DIVIDER ========== */
 .div-line {
     border: none;
     border-top: 1px solid rgba(16,185,129,0.15);
     margin: 16px 0;
-}
-
-/* ========== TIP BOX ========== */
-.tip-box {
-    background: rgba(16,185,129,0.08);
-    border-left: 3px solid #10b981;
-    border-radius: 0 12px 12px 0;
-    padding: 10px 16px;
-    color: #94a3b8;
-    font-size: 0.85rem;
-    margin: 8px 0;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -272,27 +288,119 @@ MASCOT_STEPS = [
     "Terakhir! Berapa **Open Circuit Voltage (OCV)** bateraimu? 🔌\n(3.0-4.5 V, baterai sehat biasanya di atas 3.8V)"
 ]
 
-MASCOT_THINKING = [
-    "Hmm... tunggu sebentar, aku lagi menganalisis... 🤔🔋",
-    "Sedang menghitung degradasi baterai... ⚡",
-    "Prosesorku lagi kerja keras nih! 🖥️"
-]
+MASCOT_RESULT_HIGH = ["WOW!! 🎉 Bateraimu sehat banget!", "Luar biasa! Performa baterai masih optimal! ⭐", "AMAZING! Baterai kamu dalam kondisi prima! 🚀"]
+MASCOT_RESULT_MID = ["Masih cukup bagus! 👍", "Oke, masih aman tapi mulai waspada! 💪", "Perlu perhatian sedikit nih... 🌟"]
+MASCOT_RESULT_LOW = ["Jangan panik, tapi perlu tindakan! 💙", "Segera service atau ganti baterai! 🔧", "Kesehatan baterai sudah kritis! 🔥"]
 
-MASCOT_RESULT_HIGH = [
-    "WOW!! 🎉 Bateraimu sehat banget!",
-    "Luar biasa! Performa baterai masih optimal! ⭐",
-    "AMAZING! Baterai kamu dalam kondisi prima! 🚀"
-]
-MASCOT_RESULT_MID = [
-    "Masih cukup bagus! 👍",
-    "Oke, masih aman tapi mulai waspada! 💪",
-    "Perlu perhatian sedikit nih... 🌟"
-]
-MASCOT_RESULT_LOW = [
-    "Jangan panik, tapi perlu tindakan! 💙",
-    "Segera service atau ganti baterai! 🔧",
-    "Kesehatan baterai sudah kritis! 🔥"
-]
+# ==================== FUNGSI SUGGESTION PER ASPEK ====================
+def get_parameter_suggestions(cycle, soc, r_int, ocv, soh):
+    suggestions = []
+    
+    # 1. Saran untuk Aging Cycle
+    if cycle > 800:
+        suggestions.append({
+            "param": "Aging Cycle",
+            "value": cycle,
+            "status": "critical",
+            "title": "🔴 Aging Cycle terlalu tinggi",
+            "message": f"Baterai sudah melewati {cycle} cycle. Rata-rata umur baterai EV adalah 800-1200 cycle. Segera rencanakan penggantian baterai."
+        })
+    elif cycle > 500:
+        suggestions.append({
+            "param": "Aging Cycle",
+            "value": cycle,
+            "status": "warning",
+            "title": "🟡 Aging Cycle mulai tinggi",
+            "message": f"Baterai sudah mencapai {cycle} cycle. Mulai pantau kesehatan baterai lebih sering."
+        })
+    else:
+        suggestions.append({
+            "param": "Aging Cycle",
+            "value": cycle,
+            "status": "good",
+            "title": "✅ Aging Cycle masih baik",
+            "message": f"Baterai baru {cycle} cycle. Masih jauh dari batas akhir masa pakai (800-1200 cycle)."
+        })
+    
+    # 2. Saran untuk SOC
+    if soc < 20:
+        suggestions.append({
+            "param": "SOC (%)",
+            "value": soc,
+            "status": "critical",
+            "title": "🔴 SOC terlalu rendah!",
+            "message": "Mengosongkan baterai hingga di bawah 20% secara terus-menerus dapat merusak sel baterai. Segera charge ke 50-80%."
+        })
+    elif soc > 80:
+        suggestions.append({
+            "param": "SOC (%)",
+            "value": soc,
+            "status": "warning",
+            "title": "🟡 SOC terlalu tinggi",
+            "message": f"SOC {soc}% terlalu tinggi untuk pemakaian harian. Untuk memperpanjang umur baterai, charge hanya sampai 80% untuk daily use."
+        })
+    else:
+        suggestions.append({
+            "param": "SOC (%)",
+            "value": soc,
+            "status": "good",
+            "title": "✅ SOC dalam rentang ideal",
+            "message": f"SOC {soc}% berada di rentang 20-80% yang merupakan zona aman untuk kesehatan baterai jangka panjang."
+        })
+    
+    # 3. Saran untuk R_int
+    if r_int > 150:
+        suggestions.append({
+            "param": "R_int (%)",
+            "value": r_int,
+            "status": "critical",
+            "title": "🔴 Internal Resistance terlalu tinggi!",
+            "message": f"R_int {r_int}% (naik {r_int-100}% dari normal). Ini indikasi kuat sel baterai sudah rusak. Segera lakukan service komprehensif."
+        })
+    elif r_int > 120:
+        suggestions.append({
+            "param": "R_int (%)",
+            "value": r_int,
+            "status": "warning",
+            "title": "🟡 Internal Resistance mulai naik",
+            "message": f"R_int {r_int}% (naik {r_int-100}%). Lakukan balancing cell dan cek kesehatan baterai secara berkala."
+        })
+    else:
+        suggestions.append({
+            "param": "R_int (%)",
+            "value": r_int,
+            "status": "good",
+            "title": "✅ Internal Resistance normal",
+            "message": f"R_int {r_int}% masih dalam batas normal (100-120%). Resistansi internal yang rendah menandakan baterai sehat."
+        })
+    
+    # 4. Saran untuk OCV
+    if ocv < 3.6:
+        suggestions.append({
+            "param": "OCV (V)",
+            "value": ocv,
+            "status": "critical",
+            "title": "🔴 OCV terlalu rendah!",
+            "message": f"Tegangan OCV {ocv}V jauh di bawah normal (3.8-4.2V). Ini pertanda sel baterai sudah rusak parah. Segera ganti baterai."
+        })
+    elif ocv < 3.8:
+        suggestions.append({
+            "param": "OCV (V)",
+            "value": ocv,
+            "status": "warning",
+            "title": "🟡 OCV mulai menurun",
+            "message": f"OCV {ocv}V di bawah 3.8V. Mulai ada indikasi degradasi. Pantau secara rutin."
+        })
+    else:
+        suggestions.append({
+            "param": "OCV (V)",
+            "value": ocv,
+            "status": "good",
+            "title": "✅ OCV normal",
+            "message": f"OCV {ocv}V berada di rentang sehat (3.8-4.2V). Tegangan yang stabil menandakan sel baterai dalam kondisi baik."
+        })
+    
+    return suggestions
 
 # ==================== HELPERS ====================
 def mascot_say(msg):
@@ -332,14 +440,13 @@ st.markdown('<div class="app-title">🔋 Battly Assistant</div>', unsafe_allow_h
 st.markdown('<div class="app-sub">AI Asisten Kesehatan Baterai · Prediksi SOH Berbasis ANN</div>', unsafe_allow_html=True)
 st.markdown('<hr class="div-line">', unsafe_allow_html=True)
 
-# Progress
 total_steps = 4
 current_step = min(st.session_state.step, total_steps)
 pct = int((current_step / total_steps) * 100)
 st.markdown(f'<div class="step-chip">📋 Langkah {current_step} dari {total_steps}</div>', unsafe_allow_html=True)
 progress_bar(pct)
 
-# ==================== STEP 0: GREETING ====================
+# ==================== STEP 0 ====================
 if st.session_state.step == 0:
     mascot_say(MASCOT_GREET[0])
     st.markdown("<br>", unsafe_allow_html=True)
@@ -348,10 +455,9 @@ if st.session_state.step == 0:
         st.session_state.step = 1
         st.rerun()
 
-# ==================== STEP 1-4: INPUT ====================
+# ==================== STEP 1-4 ====================
 elif 1 <= st.session_state.step <= 4:
     render_chat_history()
-    
     step = st.session_state.step
     mascot_say(MASCOT_STEPS[step - 1])
     st.markdown("<br>", unsafe_allow_html=True)
@@ -395,7 +501,6 @@ elif 1 <= st.session_state.step <= 4:
                 add_chat("user", f"OCV: **{ocv} V**")
                 st.session_state.data["ocv"] = ocv
                 
-                # Prediksi
                 with st.spinner("Battly sedang menganalisis..."):
                     time.sleep(1.5)
                     d = st.session_state.data
@@ -408,30 +513,33 @@ elif 1 <= st.session_state.step <= 4:
                 st.session_state.step = 5
                 st.rerun()
 
-# ==================== STEP 5: RESULT ====================
+# ==================== STEP 5: RESULT WITH SUGGESTIONS ====================
 elif st.session_state.step == 5:
     render_chat_history()
     
     soh = st.session_state.result
+    d = st.session_state.data
     
     if soh >= 90:
         react = random.choice(MASCOT_RESULT_HIGH)
         status = "✅ SEHAT"
         status_desc = "Baterai dalam kondisi sangat baik"
-        recommendation = "Lanjutkan penggunaan normal. Service rutin setiap 6 bulan."
         color = "#10b981"
     elif soh >= 70:
         react = random.choice(MASCOT_RESULT_MID)
         status = "⚠️ WASPADA"
         status_desc = "Baterai mulai menunjukkan degradasi"
-        recommendation = "Segera lakukan inspeksi dan balancing cell."
         color = "#f59e0b"
     else:
         react = random.choice(MASCOT_RESULT_LOW)
         status = "🔴 KRITIS"
         status_desc = "Kesehatan baterai kritis"
-        recommendation = "Ganti baterai segera untuk keselamatan dan performa."
         color = "#ef4444"
+    
+    # Dapatkan saran per aspek
+    suggestions = get_parameter_suggestions(
+        d["cycle"], d["soc"], d["r_int"], d["ocv"], soh
+    )
     
     mascot_say(f"{react}\n\nHasil analisis sudah selesai! Lihat detailnya di bawah ya~ 🔋")
     add_chat("mascot", f"{react}\n\nHasil analisis sudah selesai! Lihat detailnya di bawah ya~ 🔋")
@@ -452,8 +560,28 @@ elif st.session_state.step == 5:
     </div>
     """, unsafe_allow_html=True)
     
+    # ==================== SARAN PER ASPEK ====================
+    st.markdown("### 🔍 Analisis Per Parameter")
+    
+    for s in suggestions:
+        if s["status"] == "good":
+            icon = "✅"
+            bg_class = "suggestion-good"
+        elif s["status"] == "warning":
+            icon = "⚠️"
+            bg_class = "suggestion-warning"
+        else:
+            icon = "🔴"
+            bg_class = "suggestion-critical"
+        
+        st.markdown(f"""
+        <div class="suggestion-card {bg_class}">
+            <div class="suggestion-title">{icon} {s['title']}</div>
+            <div class="suggestion-text">{s['message']}</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
     # Summary recap
-    d = st.session_state.data
     st.markdown("""
     <div class="input-card">
         <div style="color: #10b981; font-weight: 700; font-size: 0.8rem; margin-bottom: 12px;">📊 RINGKASAN PARAMETER</div>
@@ -475,14 +603,6 @@ elif st.session_state.step == 5:
         """, unsafe_allow_html=True)
     
     st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Recommendation
-    st.markdown(f"""
-    <div class="tip-box">
-        <strong>💡 REKOMENDASI</strong><br>
-        {recommendation}
-    </div>
-    """, unsafe_allow_html=True)
     
     # Restart button
     st.markdown("<br>", unsafe_allow_html=True)
